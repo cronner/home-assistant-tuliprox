@@ -3,6 +3,7 @@
 import asyncio
 import ipaddress
 import json
+import logging
 import math
 import re
 from datetime import datetime, timezone
@@ -10,6 +11,8 @@ from typing import Any
 
 import aiohttp
 from yarl import URL
+
+_LOGGER = logging.getLogger(__name__)
 
 MAX_RESPONSE_BYTES = 2 * 1024 * 1024
 MAX_STREAMS = 2000
@@ -179,26 +182,32 @@ class TuliproxClient:
                     if response.status in (401, 403):
                         if response.status == 401 and auth:
                             return _UNAUTHORIZED
+                        _LOGGER.error("Authentication rejected: HTTP %s", response.status)
                         raise TuliproxAuthError("Authentication rejected")
                     if response.status == 429 or response.status >= 500:
                         if attempt == 0:
                             await asyncio.sleep(self._retry_delay)
                             continue
+                        _LOGGER.error("Server temporarily unavailable: HTTP %s", response.status)
                         raise TuliproxError("Server temporarily unavailable")
                     if response.status != 200:
+                        _LOGGER.error("Unexpected HTTP response: %s", response.status)
                         raise TuliproxError("Unexpected HTTP response")
                     body = bytearray()
                     async for chunk in response.content.iter_chunked(65536):
                         body.extend(chunk)
                         if len(body) > MAX_RESPONSE_BYTES:
+                            _LOGGER.error("Response exceeds size limit")
                             raise TuliproxError("Response exceeds size limit")
                     try:
                         return json.loads(body)
-                    except (ValueError, UnicodeError, RecursionError):
+                    except (ValueError, UnicodeError, RecursionError) as err:
+                        _LOGGER.error("Invalid JSON response: %s", err)
                         raise TuliproxError("Invalid JSON response") from None
-            except (aiohttp.ClientError, TimeoutError):
+            except (aiohttp.ClientError, TimeoutError) as err:
+                _LOGGER.error("Tuliprox request failed: %s", err)
                 if attempt == 1:
-                    raise TuliproxError("Unable to communicate with server") from None
+                    raise TuliproxError(f"Unable to communicate with server: {err}") from err
                 await asyncio.sleep(self._retry_delay)
         raise TuliproxError("Unable to communicate with server")
 
