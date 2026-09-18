@@ -1,0 +1,16 @@
+{
+  "title": "Tuliprox",
+  "config": {
+    "step": {
+      "user": {"title": "Connect Tuliprox", "description": "Enter the server base URL and login. Use HTTPS on untrusted networks.", "data": {"url": "Server URL", "username": "Username", "password": "Password"}},
+      "reconfigure": {"title": "Reconfigure Tuliprox", "description": "Update the server URL or login. Enter the password again. The connection is validated before saving.", "data": {"url": "Server URL", "username": "Username", "password": "Password"}},
+      "reauth_confirm": {"title": "Authenticate Tuliprox again", "description": "Authentication was rejected. Enter valid connection details and the password again.", "data": {"url": "Server URL", "username": "Username", "password": "Password"}}
+    },
+    "error": {"invalid_input": "Enter an HTTP(S) URL without embedded credentials, query parameters or fragments, and a nonempty username and password.", "invalid_auth": "Authentication was rejected.", "cannot_connect": "Cannot retrieve valid status and stream responses from the server."},
+    "abort": {"already_configured": "This server URL is already configured.", "reauth_successful": "Authentication updated successfully.", "reconfigure_successful": "Connection settings updated successfully."}
+  },
+  "options": {
+    "step": {"init": {"title": "Tuliprox options", "description": "Poll every 10-3600 seconds. Enter up to 20 exact, case-sensitive usernames separated by commas. Leave empty to disable user tracking.", "data": {"interval": "Polling interval (seconds)", "tracked_users": "Tracked usernames"}}},
+    "error": {"invalid_users": "Enter up to 20 plain usernames, each at most 64 characters, without URLs or credential-like values."}
+  }
+}

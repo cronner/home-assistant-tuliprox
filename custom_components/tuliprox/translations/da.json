@@ -1,0 +1,16 @@
+{
+  "title": "Tuliprox",
+  "config": {
+    "step": {
+      "user": {"title": "Tilslut Tuliprox", "description": "Angiv serverens basis-URL og login. Brug HTTPS p\u00e5 netv\u00e6rk, du ikke stoler p\u00e5.", "data": {"url": "Server-URL", "username": "Brugernavn", "password": "Adgangskode"}},
+      "reconfigure": {"title": "Omkonfigurer Tuliprox", "description": "Ret server-URL eller login. Indtast adgangskoden igen. Forbindelsen kontrolleres, f\u00f8r oplysningerne gemmes.", "data": {"url": "Server-URL", "username": "Brugernavn", "password": "Adgangskode"}},
+      "reauth_confirm": {"title": "Log ind p\u00e5 Tuliprox igen", "description": "Godkendelsen blev afvist. Indtast gyldige forbindelsesoplysninger og adgangskoden igen.", "data": {"url": "Server-URL", "username": "Brugernavn", "password": "Adgangskode"}}
+    },
+    "error": {"invalid_input": "Angiv en HTTP(S)-URL uden indlejret login, foresp\u00f8rgselsparametre eller fragmenter samt et brugernavn og en adgangskode.", "invalid_auth": "Godkendelsen blev afvist.", "cannot_connect": "Kan ikke hente gyldige status- og streamsvar fra serveren."},
+    "abort": {"already_configured": "Denne server-URL er allerede konfigureret.", "reauth_successful": "Login blev opdateret.", "reconfigure_successful": "Forbindelsesoplysningerne blev opdateret."}
+  },
+  "options": {
+    "step": {"init": {"title": "Tuliprox-indstillinger", "description": "Hent data hvert 10.-3600. sekund. Angiv op til 20 pr\u00e6cise brugernavne adskilt af kommaer. Store og sm\u00e5 bogstaver skelnes. Lad feltet v\u00e6re tomt for at deaktivere brugersporing.", "data": {"interval": "Opdateringsinterval (sekunder)", "tracked_users": "Brugernavne til sporing"}}},
+    "error": {"invalid_users": "Angiv op til 20 almindelige brugernavne p\u00e5 h\u00f8jst 64 tegn hver, uden URL'er eller loginlignende v\u00e6rdier."}
+  }
+}

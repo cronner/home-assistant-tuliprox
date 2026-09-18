@@ -1,0 +1,7 @@
+{
+  "name": "Tuliprox",
+  "render_readme": true,
+  "country": ["DK"],
+  "homeassistant": "2024.1.0",
+  "iot_class": "local_polling"
+}

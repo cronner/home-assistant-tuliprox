@@ -1,0 +1,12 @@
+{
+  "domain": "tuliprox",
+  "name": "Tuliprox",
+  "version": "0.1.0",
+  "codeowners": [],
+  "config_flow": true,
+  "dependencies": ["http"],
+  "documentation": "https://github.com/euzu/tuliprox",
+  "integration_type": "service",
+  "iot_class": "local_polling",
+  "requirements": []
+}
