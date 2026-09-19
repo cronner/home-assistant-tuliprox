@@ -2,9 +2,42 @@
   "title": "Tuliprox",
   "config": {
     "step": {
-      "user": {"title": "Tilslut Tuliprox", "description": "Angiv serverens basis-URL og login. Brug HTTPS p\u00e5 netv\u00e6rk, du ikke stoler p\u00e5. Xtream-legitimationsoplysninger er valgfri og aktiverer konto-/indholdssensorer.", "data": {"url": "Server-URL", "username": "Brugernavn", "password": "Adgangskode", "xtream_username": "Xtream-brugernavn (valgfrit)", "xtream_password": "Xtream-adgangskode (valgfrit)"}},
-      "reconfigure": {"title": "Omkonfigurer Tuliprox", "description": "Ret server-URL eller login. Indtast adgangskoden igen. Forbindelsen kontrolleres, f\u00f8r oplysningerne gemmes.", "data": {"url": "Server-URL", "username": "Brugernavn", "password": "Adgangskode", "xtream_username": "Xtream-brugernavn (valgfrit)", "xtream_password": "Xtream-adgangskode (valgfrit)"}},
-      "reauth_confirm": {"title": "Log ind p\u00e5 Tuliprox igen", "description": "Godkendelsen blev afvist. Indtast gyldige forbindelsesoplysninger og adgangskoden igen.", "data": {"url": "Server-URL", "username": "Brugernavn", "password": "Adgangskode", "xtream_username": "Xtream-brugernavn (valgfrit)", "xtream_password": "Xtream-adgangskode (valgfrit)"}}
+      "user": {
+        "title": "Tilslut Tuliprox",
+        "description": "Brug en Tuliprox WebUI-bruger, ikke dit Home Assistant-login eller IPTV-afspillerlogin. Brugeren skal kunne l\u00e6se serverstatus og aktive streams. Brug helst en separat bruger med l\u00e6serettigheder; administratoradgang giver flere rettigheder end n\u00f8dvendigt. Valgfrit Xtream-login aktiverer konto- og indholdssensorer.",
+        "data": {"url": "Tuliprox server-URL", "username": "WebUI-brugernavn", "password": "WebUI-adgangskode", "xtream_username": "Xtream-afspillerbrugernavn (valgfrit)", "xtream_password": "Xtream-afspilleradgangskode (valgfrit)"},
+        "data_description": {
+          "url": "Basisadressen, som Home Assistant kan kontakte, med http:// eller https:// og port, fx http://192.168.1.100:8901. Medtag en eventuel WebUI-basissti, men ikke /login, /api/v1 eller /player_api.php. Brug HTTPS p\u00e5 netv\u00e6rk, du ikke stoler p\u00e5.",
+          "username": "Brugernavnet til Tuliprox WebUI. Tillad l\u00e6seadgang til /api/v1/status og /api/v1/streams (system.read i versioner med RBAC). Skriveadgang til konfiguration eller brugeradministration er ikke n\u00f8dvendig.",
+          "password": "Adgangskoden til denne Tuliprox WebUI-bruger. Det er ikke din Home Assistant-kode, et JWT-token eller din IPTV-afspillerkode.",
+          "xtream_username": "Valgfri, separat Tuliprox-afspillerbruger som i TiviMate eller IPTV Smarters. Begge Xtream-felter skal udfyldes. Antal kanaler, film og serier g\u00e6lder denne brugers tilg\u00e6ngelige indhold.",
+          "xtream_password": "Adgangskoden til Xtream-afspillerbrugeren ovenfor, ikke WebUI-brugeren. Lad begge Xtream-felter v\u00e6re tomme ved f\u00f8rste ops\u00e6tning, hvis du kun vil se status og aktive streams."
+        }
+      },
+      "reconfigure": {
+        "title": "Omkonfigurer Tuliprox",
+        "description": "Ret server-URL eller WebUI-login uden at fjerne integrationen. Indtast WebUI-adgangskoden igen. Brugeren skal kunne l\u00e6se serverstatus og aktive streams; skriveadgang til konfiguration er ikke n\u00f8dvendig.",
+        "data": {"url": "Tuliprox server-URL", "username": "WebUI-brugernavn", "password": "WebUI-adgangskode", "xtream_username": "Xtream-afspillerbrugernavn (valgfrit)", "xtream_password": "Xtream-afspilleradgangskode (valgfrit)"},
+        "data_description": {
+          "url": "Basisadresse med protokol og port, fx http://192.168.1.100:8901. Medtag en eventuel WebUI-basissti, men ikke /login, /api/v1 eller /player_api.php. Brug HTTPS p\u00e5 netv\u00e6rk, du ikke stoler p\u00e5.",
+          "username": "Tuliprox WebUI-bruger med l\u00e6seadgang til status og streams (system.read i versioner med RBAC), ikke en Home Assistant- eller IPTV-afspillerbruger.",
+          "password": "Indtast den aktuelle WebUI-adgangskode igen. Den gemte adgangskode vises aldrig i formularen.",
+          "xtream_username": "Separat afspillerbruger til kontostatus og indholdstal. Dette er ikke WebUI-brugernavnet.",
+          "xtream_password": "Ved \u00e6ndring af Xtream-login: indtast b\u00e5de afspillerbrugernavn og tilh\u00f8rende adgangskode. Koden er separat fra WebUI-adgangskoden."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Log ind p\u00e5 Tuliprox igen",
+        "description": "WebUI-godkendelsen blev afvist. Indtast det aktuelle Tuliprox WebUI-login. Brugeren skal kunne l\u00e6se serverstatus og aktive streams. Xtream-afspillerlogin er separat.",
+        "data": {"url": "Tuliprox server-URL", "username": "WebUI-brugernavn", "password": "WebUI-adgangskode", "xtream_username": "Xtream-afspillerbrugernavn (valgfrit)", "xtream_password": "Xtream-afspilleradgangskode (valgfrit)"},
+        "data_description": {
+          "url": "Tuliprox-basisadresse med protokol og port, fx http://192.168.1.100:8901. Tilf\u00f8j ikke /login, /api/v1 eller /player_api.php.",
+          "username": "Tuliprox WebUI-bruger med l\u00e6seadgang til status og streams (system.read i versioner med RBAC). Brug helst en separat bruger med l\u00e6serettigheder.",
+          "password": "Den aktuelle adgangskode til WebUI-brugeren, ikke en Home Assistant-kode eller et JWT-token.",
+          "xtream_username": "Valgfri, separat IPTV-afspillerbruger til konto- og indholdssensorer.",
+          "xtream_password": "Ved \u00e6ndring af Xtream-login: indtast begge afspilleroplysninger. WebUI-adgangskoden erstatter ikke Xtream-adgangskoden."
+        }
+      }
     },
     "error": {"invalid_input": "Angiv en HTTP(S)-URL uden indlejret login, foresp\u00f8rgselsparametre eller fragmenter samt et brugernavn og en adgangskode.", "invalid_auth": "Godkendelsen blev afvist.", "cannot_connect": "Kan ikke hente gyldige status- og streamsvar fra serveren.", "invalid_xtream_auth": "Xtream-godkendelsen blev afvist. Xtream-legitimationsoplysninger er blevet fjernet."},
     "abort": {"already_configured": "Denne server-URL er allerede konfigureret.", "reauth_successful": "Login blev opdateret.", "reconfigure_successful": "Forbindelsesoplysningerne blev opdateret."}

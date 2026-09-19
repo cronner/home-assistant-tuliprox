@@ -2,9 +2,42 @@
   "title": "Tuliprox",
   "config": {
     "step": {
-      "user": {"title": "Connect Tuliprox", "description": "Enter the server base URL and login. Use HTTPS on untrusted networks. Xtream credentials are optional and enable account/content sensors.", "data": {"url": "Server URL", "username": "Username", "password": "Password", "xtream_username": "Xtream username (optional)", "xtream_password": "Xtream password (optional)"}},
-      "reconfigure": {"title": "Reconfigure Tuliprox", "description": "Update the server URL or login. Enter the password again. The connection is validated before saving.", "data": {"url": "Server URL", "username": "Username", "password": "Password", "xtream_username": "Xtream username (optional)", "xtream_password": "Xtream password (optional)"}},
-      "reauth_confirm": {"title": "Authenticate Tuliprox again", "description": "Authentication was rejected. Enter valid connection details and the password again.", "data": {"url": "Server URL", "username": "Username", "password": "Password", "xtream_username": "Xtream username (optional)", "xtream_password": "Xtream password (optional)"}}
+      "user": {
+        "title": "Connect Tuliprox",
+        "description": "Use a Tuliprox WebUI account, not your Home Assistant login or IPTV player login. It must be allowed to read server status and active streams. Prefer a dedicated read-only account; administrator access is broader than needed. Optional Xtream credentials enable account and content sensors.",
+        "data": {"url": "Tuliprox server URL", "username": "WebUI username", "password": "WebUI password", "xtream_username": "Xtream player username (optional)", "xtream_password": "Xtream player password (optional)"},
+        "data_description": {
+          "url": "Base URL reachable from Home Assistant, including http:// or https:// and the port, e.g. http://192.168.1.100:8901. Include a configured WebUI base path, but not /login, /api/v1 or /player_api.php. Use HTTPS on untrusted networks.",
+          "username": "Username used to sign in to Tuliprox WebUI. Allow read access to /api/v1/status and /api/v1/streams (system.read in versions with RBAC). No configuration-write or user-management access is needed.",
+          "password": "Password for this Tuliprox WebUI account. This is not your Home Assistant password, a JWT token or your IPTV player password.",
+          "xtream_username": "Optional, separate Tuliprox player account, as used in TiviMate or IPTV Smarters. Both Xtream fields are needed. Counts reflect the content available to this account.",
+          "xtream_password": "Password for the Xtream player account above, not the WebUI account. Leave both Xtream fields empty during initial setup if only status and active streams are needed."
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Tuliprox",
+        "description": "Update the server URL or WebUI login without removing the integration. Enter the WebUI password again. The account needs read access to server status and active streams; configuration-write access is not needed.",
+        "data": {"url": "Tuliprox server URL", "username": "WebUI username", "password": "WebUI password", "xtream_username": "Xtream player username (optional)", "xtream_password": "Xtream player password (optional)"},
+        "data_description": {
+          "url": "Base URL including protocol and port, e.g. http://192.168.1.100:8901. Include any WebUI base path, but not /login, /api/v1 or /player_api.php. Use HTTPS on untrusted networks.",
+          "username": "Tuliprox WebUI account with read access to status and streams (system.read in versions with RBAC), not a Home Assistant or IPTV player account.",
+          "password": "Enter the current WebUI password again. The stored password is never shown in this form.",
+          "xtream_username": "Separate player account for account status and content counts. This is not the WebUI username.",
+          "xtream_password": "When changing Xtream login, enter both the player username and its password. This is separate from the WebUI password."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Authenticate Tuliprox again",
+        "description": "WebUI authentication was rejected. Enter the current Tuliprox WebUI login. The account must be allowed to read server status and active streams. Xtream player credentials are separate.",
+        "data": {"url": "Tuliprox server URL", "username": "WebUI username", "password": "WebUI password", "xtream_username": "Xtream player username (optional)", "xtream_password": "Xtream player password (optional)"},
+        "data_description": {
+          "url": "Tuliprox base URL including protocol and port, e.g. http://192.168.1.100:8901. Do not append /login, /api/v1 or /player_api.php.",
+          "username": "Tuliprox WebUI account with read access to status and streams (system.read in versions with RBAC). Prefer a dedicated read-only account.",
+          "password": "Current password for that WebUI account, not a Home Assistant password or JWT token.",
+          "xtream_username": "Optional, separate IPTV player account used for account and content sensors.",
+          "xtream_password": "When changing Xtream login, enter both player credentials. The WebUI password does not replace the Xtream password."
+        }
+      }
     },
     "error": {"invalid_input": "Enter an HTTP(S) URL without embedded credentials, query parameters or fragments, and a nonempty username and password.", "invalid_auth": "Authentication was rejected.", "cannot_connect": "Cannot retrieve valid status and stream responses from the server.", "invalid_xtream_auth": "Xtream authentication was rejected. Xtream credentials have been removed."},
     "abort": {"already_configured": "This server URL is already configured.", "reauth_successful": "Authentication updated successfully.", "reconfigure_successful": "Connection settings updated successfully."}
