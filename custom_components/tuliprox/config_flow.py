@@ -28,6 +28,8 @@ from .api import (
 from .const import (
     CONF_INTERVAL,
     CONF_TRACKED_USERS,
+    CONF_XTREAM_PASSWORD,
+    CONF_XTREAM_USERNAME,
     DEFAULT_INTERVAL,
     DEFAULT_TRACKED_USERS,
     DOMAIN,
@@ -91,6 +93,25 @@ class TuliproxConfigFlow(ConfigFlow, domain=DOMAIN):
                     data[CONF_USERNAME],
                     data[CONF_PASSWORD],
                 ).async_snapshot()
+                
+                # Validate Xtream credentials if provided
+                xtream_username = data.get(CONF_XTREAM_USERNAME, "").strip()
+                xtream_password = data.get(CONF_XTREAM_PASSWORD, "").strip()
+                if xtream_username and xtream_password:
+                    from .xtream import XtreamClient
+                    try:
+                        await XtreamClient(
+                            async_get_clientsession(self.hass),
+                            data[CONF_URL],
+                            xtream_username,
+                            xtream_password,
+                        ).async_get_user_info()
+                    except Exception:
+                        errors["base"] = "invalid_xtream_auth"
+                        # Still allow setup without Xtream
+                        data.pop(CONF_XTREAM_USERNAME, None)
+                        data.pop(CONF_XTREAM_PASSWORD, None)
+                        
             except ValueError:
                 errors["base"] = "invalid_input"
             except TuliproxAuthError:
@@ -121,6 +142,15 @@ class TuliproxConfigFlow(ConfigFlow, domain=DOMAIN):
                         CONF_USERNAME, default=defaults.get(CONF_USERNAME, "")
                     ): TextSelector(),
                     vol.Required(CONF_PASSWORD): TextSelector(
+                        TextSelectorConfig(type=TextSelectorType.PASSWORD)
+                    ),
+                    vol.Optional(
+                        CONF_XTREAM_USERNAME,
+                        default=defaults.get(CONF_XTREAM_USERNAME, ""),
+                    ): TextSelector(),
+                    vol.Optional(
+                        CONF_XTREAM_PASSWORD,
+                    ): TextSelector(
                         TextSelectorConfig(type=TextSelectorType.PASSWORD)
                     ),
                 }

@@ -2,11 +2,11 @@
   "title": "Tuliprox",
   "config": {
     "step": {
-      "user": {"title": "Tilslut Tuliprox", "description": "Angiv serverens basis-URL og login. Brug HTTPS p\u00e5 netv\u00e6rk, du ikke stoler p\u00e5.", "data": {"url": "Server-URL", "username": "Brugernavn", "password": "Adgangskode"}},
-      "reconfigure": {"title": "Omkonfigurer Tuliprox", "description": "Ret server-URL eller login. Indtast adgangskoden igen. Forbindelsen kontrolleres, f\u00f8r oplysningerne gemmes.", "data": {"url": "Server-URL", "username": "Brugernavn", "password": "Adgangskode"}},
-      "reauth_confirm": {"title": "Log ind p\u00e5 Tuliprox igen", "description": "Godkendelsen blev afvist. Indtast gyldige forbindelsesoplysninger og adgangskoden igen.", "data": {"url": "Server-URL", "username": "Brugernavn", "password": "Adgangskode"}}
+      "user": {"title": "Tilslut Tuliprox", "description": "Angiv serverens basis-URL og login. Brug HTTPS p\u00e5 netv\u00e6rk, du ikke stoler p\u00e5. Xtream-legitimationsoplysninger er valgfri og aktiverer konto-/indholdssensorer.", "data": {"url": "Server-URL", "username": "Brugernavn", "password": "Adgangskode", "xtream_username": "Xtream-brugernavn (valgfrit)", "xtream_password": "Xtream-adgangskode (valgfrit)"}},
+      "reconfigure": {"title": "Omkonfigurer Tuliprox", "description": "Ret server-URL eller login. Indtast adgangskoden igen. Forbindelsen kontrolleres, f\u00f8r oplysningerne gemmes.", "data": {"url": "Server-URL", "username": "Brugernavn", "password": "Adgangskode", "xtream_username": "Xtream-brugernavn (valgfrit)", "xtream_password": "Xtream-adgangskode (valgfrit)"}},
+      "reauth_confirm": {"title": "Log ind p\u00e5 Tuliprox igen", "description": "Godkendelsen blev afvist. Indtast gyldige forbindelsesoplysninger og adgangskoden igen.", "data": {"url": "Server-URL", "username": "Brugernavn", "password": "Adgangskode", "xtream_username": "Xtream-brugernavn (valgfrit)", "xtream_password": "Xtream-adgangskode (valgfrit)"}}
     },
-    "error": {"invalid_input": "Angiv en HTTP(S)-URL uden indlejret login, foresp\u00f8rgselsparametre eller fragmenter samt et brugernavn og en adgangskode.", "invalid_auth": "Godkendelsen blev afvist.", "cannot_connect": "Kan ikke hente gyldige status- og streamsvar fra serveren."},
+    "error": {"invalid_input": "Angiv en HTTP(S)-URL uden indlejret login, foresp\u00f8rgselsparametre eller fragmenter samt et brugernavn og en adgangskode.", "invalid_auth": "Godkendelsen blev afvist.", "cannot_connect": "Kan ikke hente gyldige status- og streamsvar fra serveren.", "invalid_xtream_auth": "Xtream-godkendelsen blev afvist. Xtream-legitimationsoplysninger er blevet fjernet."},
     "abort": {"already_configured": "Denne server-URL er allerede konfigureret.", "reauth_successful": "Login blev opdateret.", "reconfigure_successful": "Forbindelsesoplysningerne blev opdateret."}
   },
   "options": {

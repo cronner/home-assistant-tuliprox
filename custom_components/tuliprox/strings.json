@@ -2,11 +2,11 @@
   "title": "Tuliprox",
   "config": {
     "step": {
-      "user": {"title": "Connect Tuliprox", "description": "Enter the server base URL and login. Use HTTPS on untrusted networks.", "data": {"url": "Server URL", "username": "Username", "password": "Password"}},
-      "reconfigure": {"title": "Reconfigure Tuliprox", "description": "Update the server URL or login. Enter the password again. The connection is validated before saving.", "data": {"url": "Server URL", "username": "Username", "password": "Password"}},
-      "reauth_confirm": {"title": "Authenticate Tuliprox again", "description": "Authentication was rejected. Enter valid connection details and the password again.", "data": {"url": "Server URL", "username": "Username", "password": "Password"}}
+      "user": {"title": "Connect Tuliprox", "description": "Enter the server base URL and login. Use HTTPS on untrusted networks. Xtream credentials are optional and enable account/content sensors.", "data": {"url": "Server URL", "username": "Username", "password": "Password", "xtream_username": "Xtream username (optional)", "xtream_password": "Xtream password (optional)"}},
+      "reconfigure": {"title": "Reconfigure Tuliprox", "description": "Update the server URL or login. Enter the password again. The connection is validated before saving.", "data": {"url": "Server URL", "username": "Username", "password": "Password", "xtream_username": "Xtream username (optional)", "xtream_password": "Xtream password (optional)"}},
+      "reauth_confirm": {"title": "Authenticate Tuliprox again", "description": "Authentication was rejected. Enter valid connection details and the password again.", "data": {"url": "Server URL", "username": "Username", "password": "Password", "xtream_username": "Xtream username (optional)", "xtream_password": "Xtream password (optional)"}}
     },
-    "error": {"invalid_input": "Enter an HTTP(S) URL without embedded credentials, query parameters or fragments, and a nonempty username and password.", "invalid_auth": "Authentication was rejected.", "cannot_connect": "Cannot retrieve valid status and stream responses from the server."},
+    "error": {"invalid_input": "Enter an HTTP(S) URL without embedded credentials, query parameters or fragments, and a nonempty username and password.", "invalid_auth": "Authentication was rejected.", "cannot_connect": "Cannot retrieve valid status and stream responses from the server.", "invalid_xtream_auth": "Xtream authentication was rejected. Xtream credentials have been removed."},
     "abort": {"already_configured": "This server URL is already configured.", "reauth_successful": "Authentication updated successfully.", "reconfigure_successful": "Connection settings updated successfully."}
   },
   "options": {
